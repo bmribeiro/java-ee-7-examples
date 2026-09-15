@@ -1,0 +1,371 @@
+openapi: 3.0.3
+
+info:
+  title: Java EE 7 REST Example
+  description: >
+    Simple REST API demonstrating Java EE 7,
+    JAX-RS, EJB and JSON-P.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080/rest/api
+    description: Local GlassFish server
+
+tags:
+  - name: Hello
+    description: Simple REST examples
+
+  - name: Users
+    description: User CRUD operations
+
+
+paths:
+
+  /hello:
+
+    get:
+      tags:
+        - Hello
+
+      summary: Hello endpoint
+      operationId: getHello
+
+      responses:
+
+        '200':
+          description: Successful response
+
+          content:
+            text/plain:
+              schema:
+                type: string
+
+              example: Hello Java EE 7 REST!
+
+
+  /hello/{name}:
+
+    get:
+      tags:
+        - Hello
+
+      summary: Hello endpoint with name
+      operationId: getHelloByName
+
+      parameters:
+
+        - name: name
+          in: path
+          required: true
+
+          schema:
+            type: string
+
+          example: Bruno
+
+      responses:
+
+        '200':
+          description: Successful response
+
+          content:
+            text/plain:
+              schema:
+                type: string
+
+              example: Hello Bruno!
+
+
+  /users:
+
+    get:
+      tags:
+        - Users
+
+      summary: List all users
+      operationId: getUsers
+
+      responses:
+
+        '200':
+          description: List of users
+
+          content:
+            application/json:
+
+              schema:
+                type: array
+
+                items:
+                  $ref: '#/components/schemas/User'
+
+              example:
+                - id: 1
+                  name: Bruno
+                  email: bruno@example.com
+
+                - id: 2
+                  name: Maria
+                  email: maria@example.com
+
+
+    post:
+      tags:
+        - Users
+
+      summary: Create a user
+      operationId: createUser
+
+      requestBody:
+        required: true
+
+        content:
+          application/json:
+
+            schema:
+              $ref: '#/components/schemas/UserInput'
+
+            example:
+              name: Ana
+              email: ana@example.com
+
+      responses:
+
+        '201':
+          description: User created successfully
+
+          headers:
+
+            Location:
+              description: URI of the created user
+
+              schema:
+                type: string
+                format: uri
+
+          content:
+            application/json:
+
+              schema:
+                $ref: '#/components/schemas/User'
+
+              example:
+                id: 3
+                name: Ana
+                email: ana@example.com
+
+
+        '400':
+          description: Invalid request
+
+          content:
+            application/json:
+
+              schema:
+                $ref: '#/components/schemas/Error'
+
+              example:
+                error: Name and email are required
+
+
+  /users/{id}:
+
+    parameters:
+
+      - name: id
+        in: path
+        required: true
+
+        schema:
+          type: integer
+          format: int64
+
+        example: 1
+
+
+    get:
+      tags:
+        - Users
+
+      summary: Get user by ID
+      operationId: getUser
+
+      responses:
+
+        '200':
+          description: User found
+
+          content:
+            application/json:
+
+              schema:
+                $ref: '#/components/schemas/User'
+
+              example:
+                id: 1
+                name: Bruno
+                email: bruno@example.com
+
+
+        '404':
+          description: User not found
+
+          content:
+            application/json:
+
+              schema:
+                $ref: '#/components/schemas/Error'
+
+              example:
+                error: User not found
+
+
+    put:
+      tags:
+        - Users
+
+      summary: Update a user
+      operationId: updateUser
+
+      requestBody:
+        required: true
+
+        content:
+          application/json:
+
+            schema:
+              $ref: '#/components/schemas/UserInput'
+
+            example:
+              name: Bruno Ribeiro
+              email: bruno.ribeiro@example.com
+
+      responses:
+
+        '200':
+          description: User updated successfully
+
+          content:
+            application/json:
+
+              schema:
+                $ref: '#/components/schemas/User'
+
+              example:
+                id: 1
+                name: Bruno Ribeiro
+                email: bruno.ribeiro@example.com
+
+
+        '400':
+          description: Invalid request
+
+          content:
+            application/json:
+
+              schema:
+                $ref: '#/components/schemas/Error'
+
+              example:
+                error: Name and email are required
+
+
+        '404':
+          description: User not found
+
+          content:
+            application/json:
+
+              schema:
+                $ref: '#/components/schemas/Error'
+
+              example:
+                error: User not found
+
+
+    delete:
+      tags:
+        - Users
+
+      summary: Delete a user
+      operationId: deleteUser
+
+      responses:
+
+        '204':
+          description: User deleted successfully
+
+
+        '404':
+          description: User not found
+
+          content:
+            application/json:
+
+              schema:
+                $ref: '#/components/schemas/Error'
+
+              example:
+                error: User not found
+
+
+components:
+
+  schemas:
+
+    User:
+
+      type: object
+
+      required:
+        - id
+        - name
+        - email
+
+      properties:
+
+        id:
+          type: integer
+          format: int64
+          example: 1
+
+        name:
+          type: string
+          example: Bruno Ribeiro
+
+        email:
+          type: string
+          example: bruno@example.com
+
+
+    UserInput:
+
+      type: object
+
+      required:
+        - name
+        - email
+
+      properties:
+
+        name:
+          type: string
+          example: Ana
+
+        email:
+          type: string
+          example: ana@example.com
+
+
+    Error:
+
+      type: object
+
+      required:
+        - error
+
+      properties:
+
+        error:
+          type: string
+          example: User not found

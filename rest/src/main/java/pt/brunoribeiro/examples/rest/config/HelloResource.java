@@ -1,4 +1,4 @@
-package pt.brunoribeiro.examples.rest;
+package pt.brunoribeiro.examples.rest.config;
 
 import javax.json.Json;
 import javax.ws.rs.GET;

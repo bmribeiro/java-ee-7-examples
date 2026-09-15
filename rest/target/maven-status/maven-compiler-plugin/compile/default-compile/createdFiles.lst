@@ -1,2 +1,5 @@
-pt\brunoribeiro\examples\rest\RestApplication.class
-pt\brunoribeiro\examples\rest\HelloResource.class
+pt\brunoribeiro\examples\rest\model\User.class
+pt\brunoribeiro\examples\rest\config\RestApplication.class
+pt\brunoribeiro\examples\rest\config\HelloResource.class
+pt\brunoribeiro\examples\rest\service\UserService.class
+pt\brunoribeiro\examples\rest\resource\UserResource.class
