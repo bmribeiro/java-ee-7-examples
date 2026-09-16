@@ -6,8 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="rest" />
+        <module name="soap-jaxws" />
+        <module name="rest-jaxrs" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="rest" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

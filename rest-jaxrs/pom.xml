@@ -13,11 +13,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>rest</artifactId>
+    <artifactId>rest-jaxrs</artifactId>
 
     <packaging>war</packaging>
 
-    <name>Java EE 7 - REST</name>
+    <name>Java EE 7 - REST JAX-RS</name>
 
     <dependencies>
         <dependency>
@@ -27,7 +27,7 @@
     </dependencies>
 
     <build>
-        <finalName>rest</finalName>
+        <finalName>rest-jaxrs</finalName>
 
         <plugins>
             <plugin>
