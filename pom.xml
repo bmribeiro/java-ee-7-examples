@@ -9,6 +9,7 @@
     <modules>
         <module>rest-jaxrs</module>
         <module>soap-jaxws</module>
+        <module>ejb</module>
     </modules>
     <dependencies>
         <dependency>

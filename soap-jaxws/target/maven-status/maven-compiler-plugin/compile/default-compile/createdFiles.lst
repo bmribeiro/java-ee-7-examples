@@ -1,0 +1,5 @@
+pt\brunoribeiro\examples\soap\model\Customer.class
+pt\brunoribeiro\examples\soap\fault\CustomerNotFoundException.class
+pt\brunoribeiro\examples\soap\fault\CustomerFault.class
+pt\brunoribeiro\examples\soap\endpoint\CustomerSoapService.class
+pt\brunoribeiro\examples\soap\service\CustomerService.class
